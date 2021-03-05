@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import {
   RiHome2Fill,
   RiStarFill,
@@ -26,3 +28,17 @@ const icons = {
   previous: GrFormPrevious,
   next: GrFormNext,
 };
+
+function Icon({ type, color, size }) {
+  const SelectedIcon = icons[type];
+  const baseCSS = css`
+    fill: ${color};
+    font-size: ${size}px;
+    polyline {
+      stroke: ${color};
+    }
+  `
+  return <SelectedIcon css={baseCSS}/>
+}
+
+export default Icon;
