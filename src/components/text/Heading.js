@@ -1,19 +1,23 @@
-/* 
-h1 {
-    font-family: Source Code Pro;
-    font-style: normal;
-    font-weight: normal;
+import styled from "@emotion/styled"
+
+const StyledHeading1 = styled.h1`
     font-size: 32px;
     line-height: 40px;
-    color: #333333;    
-} 
+    color: #000000; 
+`
 
-h2 {
-    font-family: Source Code Pro;
-    font-style: normal;
-    font-weight: normal;
+const StyledHeading2 = styled.h2`
     font-size: 28px;
     line-height: 35px;
-    color: #333333;
+    color: #000000;
+`
+
+function Heading1({ children }) {
+    return <StyledHeading1>{children}</StyledHeading1>
 }
-*/
+
+function Heading2({ children }) {
+    return <StyledHeading2>{children}</StyledHeading2>
+}
+
+export { Heading1, Heading2 }
