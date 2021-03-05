@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.github.com/users'
+const BASE_URL = 'https://api.github.com'
 
 async function apitFetch(...args) {
     const response = await fetch(...args)
@@ -14,11 +14,11 @@ function GithubServices() {
     return GithubServices.instance
 }
 
-GithubServices.prototype.login = function() {
-    return apitFetch(`${BASE_URL}/`, {
+GithubServices.prototype.login = function(username) {
+    return apitFetch(`${BASE_URL}/users/${username}`, {
         method: 'GET',
         headers: {
-
+            
         }
     })
 }
