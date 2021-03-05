@@ -1,5 +1,11 @@
+import Button from "../components/UI/Button";
+
 function Home() {
-    return <div></div>
+    return (
+        <div>
+            <Button>Continue</Button>
+        </div>
+    )
 }
 
 export default Home;
