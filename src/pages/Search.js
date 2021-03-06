@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import NavBar from "../components/containers/NavBar";
 import Card from '../components/containers/Card';
 import { Heading2 } from '../components/text/Heading';
@@ -29,7 +30,11 @@ function Search() {
                 <Content>public gists</Content>
             </Card>
         </div>
-        <NavBar />
+        <NavBar css={css`
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        `} />
     </section>
   );
 }

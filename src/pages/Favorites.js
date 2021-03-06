@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Pagination from '../components/containers/Pagination';
 import NavBar from '../components/containers/NavBar';
 import Card from '../components/containers/Card';
@@ -19,7 +20,11 @@ function Favorites() {
                 </div>
                 <Icon type="star" color="#F2C94C" size="22" />
             </Card>
-            <NavBar />
+            <NavBar css={css`
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            `} />
         </section>
     )
 }

@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Pagination from "../components/containers/Pagination";
 import NavBar from '../components/containers/NavBar';
 import Card from '../components/containers/Card';
@@ -12,7 +13,11 @@ function Followers() {
                 <Avatar src="" measure="40" />
                 <Content>LazyBwoy</Content>
             </Card>
-            <NavBar />
+            <NavBar css={css`
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            `} />
         </section>
     )
 }
