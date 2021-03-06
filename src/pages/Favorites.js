@@ -11,7 +11,7 @@ import styled from "@emotion/styled";
 const StyledFavorites = styled.section`
   width: 100vw;
   height: 100vh;
-  padding: 4% 0 18% 0;
+  padding: 16px 0 18% 0;
 
   & > .container-favorites {
     margin-top: 20px;
@@ -25,7 +25,13 @@ function Favorites() {
   const favorites = [1, 2, 3, 4, 5, 6, 7];
   return (
     <StyledFavorites>
-      <Heading2 css={css`margin-left: 32px;`}>Favorites (7)</Heading2>
+      <Heading2
+        css={css`
+          margin-left: 32px;
+        `}
+      >
+        Favorites (7)
+      </Heading2>
       <div className="container-favorites">
         <Pagination />
         {favorites.map((_favorite) => {
