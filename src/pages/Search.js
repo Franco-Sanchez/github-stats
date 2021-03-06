@@ -73,34 +73,35 @@ function Search({ history }) {
     );
   };
 
-  const cards = [
-    {
-      color: "#2D9CDB",
-      content: "followers",
-      info: "followers",
-      type: "followers",
-    },
-    {
-      color: "#F2994A",
-      content: "following",
-      info: "following",
-      type: "followings",
-    },
-    {
-      color: "#219653",
-      content: "public repos",
-      info: "public_repos",
-      type: "repos",
-    },
-    {
-      color: "#828282",
-      content: "public gists",
-      info: "public_gists",
-      type: "gists",
-    },
-  ];
-
   const Profile = () => {
+
+    const cards = [
+      {
+        color: "#2D9CDB",
+        content: "followers",
+        info: "followers",
+        type: "followers",
+      },
+      {
+        color: "#F2994A",
+        content: "following",
+        info: "following",
+        type: "followings",
+      },
+      {
+        color: "#219653",
+        content: "public repos",
+        info: "public_repos",
+        type: "repos",
+      },
+      {
+        color: "#828282",
+        content: "public gists",
+        info: "public_gists",
+        type: "gists",
+      },
+    ];
+
     return (
       <>
         <Avatar src={data.avatar_url} measure="120" />
@@ -120,6 +121,7 @@ function Search({ history }) {
           {cards.map((card) => {
             return (
               <Card
+                key={card.type}
                 type="default"
                 onPress={() =>
                   card.type !== "gists"

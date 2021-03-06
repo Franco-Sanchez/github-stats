@@ -6,6 +6,8 @@ import Avatar from "../components/UI/Avatar";
 import { Heading2 } from "../components/text/Heading";
 import { Content } from "../components/text/Content";
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import GithubServices from "../services/githubServices";
 
 const StyledFollowers = styled.section`
   width: 100vw;
@@ -20,8 +22,18 @@ const StyledFollowers = styled.section`
   }
 `;
 
-function Followers({ history }) {
-  const followers = [1, 2, 3, 4, 5, 6, 7];
+function Followers({ match }) {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    async function fetchFollowers() {
+      const gs = new GithubServices();
+      const followers = await gs.followers(match.params.username)
+      setData(followers);
+    }
+    fetchFollowers();
+  }, []);
+
   return (
     <StyledFollowers>
       <Heading2
@@ -29,15 +41,15 @@ function Followers({ history }) {
           margin-left: 32px;
         `}
       >
-        Followers (64,254)
+        Followers ({data.length})
       </Heading2>
       <div className="container-followers">
         <Pagination />
-        {followers.map((_follower) => {
+        {data.map((follower) => {
           return (
-            <Card type="follow">
-              <Avatar src="" measure="40" />
-              <Content>LazyBwoy</Content>
+            <Card type="follow" key={follower.login}>
+              <Avatar src={follower.avatar_url} measure="40" />
+              <Content>{follower.login}</Content>
             </Card>
           );
         })}
