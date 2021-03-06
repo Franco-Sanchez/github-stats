@@ -15,7 +15,7 @@ function GithubServices() {
     return GithubServices.instance
 }
 
-GithubServices.prototype.perfil = function(username) {
+GithubServices.prototype.profile = function(username) {
     return apitFetch(`${BASE_URL}/users/${username}`, {
         method: 'GET',
         headers: {
