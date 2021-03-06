@@ -5,7 +5,7 @@ import { Heading2 } from '../components/text/Heading';
 import Icon from '../components/UI/Icon';
 import { Content } from '../components/text/Content'; 
 
-function Search() {
+function Search({ history }) {
   return (
     <section>
         <div>

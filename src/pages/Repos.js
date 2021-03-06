@@ -3,18 +3,48 @@ import NavBar from "../components/containers/NavBar";
 import Pagination from "../components/containers/Pagination";
 import Card from "../components/containers/Card";
 import { ContentBold, ContentSmall } from "../components/text/Content";
+import { Heading2 } from "../components/text/Heading";
+import styled from "@emotion/styled";
 
-function Repos() {
+const StyledRepos = styled.section`
+  width: 100vw;
+  height: 100vh;
+  padding: 16px 0 18% 0;
+
+  & > .container-repos {
+    margin-top: 20px;
+    display: grid;
+    justify-items: center;
+    row-gap: 16px;
+  }
+`;
+
+function Repos({ history }) {
+  const repos = [1, 2, 3, 4, 5];
   return (
-    <section>
-      <Pagination />
-      <Card type="repos">
-        <ContentBold color="#2D9CDB">gaearon/6to5</ContentBold>
-        <ContentSmall>
-          Turn ES6+ code into readable vanilla ES5 with source maps and more!
-        </ContentSmall>
-        <div></div>
-      </Card>
+    <StyledRepos>
+      <Heading2
+        css={css`
+          margin-left: 32px;
+        `}
+      >
+        Public Repos (249)
+      </Heading2>
+      <div className="container-repos">
+        <Pagination />
+        {repos.map((_repo) => {
+          return (
+            <Card type="repos">
+              <ContentBold color="#2D9CDB">gaearon/6to5</ContentBold>
+              <ContentSmall>
+                Turn ES6+ code into readable vanilla ES5 with source maps and
+                more!
+              </ContentSmall>
+              <div></div>
+            </Card>
+          );
+        })}
+      </div>
       <NavBar
         css={css`
           position: fixed;
@@ -22,7 +52,7 @@ function Repos() {
           width: 100%;
         `}
       />
-    </section>
+    </StyledRepos>
   );
 }
 
