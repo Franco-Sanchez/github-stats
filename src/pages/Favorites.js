@@ -11,7 +11,7 @@ import styled from "@emotion/styled";
 const StyledFavorites = styled.section`
   width: 100vw;
   height: 100vh;
-  padding: 16px 0 18% 0;
+  padding: 4% 0 18% 0;
 
   & > .container-favorites {
     margin-top: 20px;
