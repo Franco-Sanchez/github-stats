@@ -5,6 +5,8 @@ import Card from "../components/containers/Card";
 import { ContentBold, ContentSmall } from "../components/text/Content";
 import { Heading2 } from "../components/text/Heading";
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import GithubServices from '../services/githubServices';
 
 const StyledRepos = styled.section`
   width: 100vw;
@@ -19,8 +21,18 @@ const StyledRepos = styled.section`
   }
 `;
 
-function Repos({ history }) {
-  const repos = [1, 2, 3, 4, 5];
+function Repos({ match }) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchRepos() {
+      const gh = new GithubServices();
+      const repos = await gh.repos(match.params.username);
+      setData(repos);
+    }
+    fetchRepos();
+  },[])
+
   return (
     <StyledRepos>
       <Heading2
@@ -28,23 +40,22 @@ function Repos({ history }) {
           margin-left: 32px;
         `}
       >
-        Public Repos (249)
+        Public Repos ({data.length})
       </Heading2>
       <div className="container-repos">
         <Pagination />
-        {repos.map((_repo) => {
+        {data.map(repo => {
           return (
-            <Card type="repos">
+            <Card type="repos" onPress={() => window.open(repo.html_url, '_blank')}>
               <ContentBold
                 css={css`
                   color: #2d9cdb;
                 `}
               >
-                gaearon/6to5
+                {repo.full_name.length <= 25 ?  repo.full_name : `${repo.full_name.slice(0, 25)}...`}
               </ContentBold>
               <ContentSmall>
-                Turn ES6+ code into readable vanilla ES5 with source maps and
-                more!
+                {repo.description}
               </ContentSmall>
               <div></div>
             </Card>
