@@ -20,7 +20,7 @@ const StyledFollowings = styled.section`
   }
 `;
 
-function Followings() {
+function Followings({ history }) {
   const followings = [1, 2, 3, 4, 5, 6, 7];
   return (
     <StyledFollowings>
