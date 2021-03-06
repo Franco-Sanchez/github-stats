@@ -4,11 +4,12 @@ const StyledContent = styled.p`
     font-size: 16px;
     line-height: 20px;
     color: #333333;
+    ${props => props.css ? props.css : ''}
 `
 
 const StyledContentBold = styled(StyledContent)`
     font-weight: bold;
-    color: ${props => props.color ? props.color : '#333'};
+    ${props => props.css ? props.css : ''};
 `
 
 const StyledContentLarge = styled(StyledContent)`
@@ -33,16 +34,16 @@ function ContentLargeBold({ children }) {
     return <StyledContentLargeBold>{children}</StyledContentLargeBold>
 }
 
-function Content({ children }) {
-    return <StyledContent>{children}</StyledContent>
+function Content({ children, css }) {
+    return <StyledContent css={css}>{children}</StyledContent>
 }
 
 function ContentSmall({ children }) {
     return <StyledContentSmall>{children}</StyledContentSmall>
 }
 
-function ContentBold({ children, color }) {
-    return <StyledContentBold color={color}>{children}</StyledContentBold>
+function ContentBold({ children, css }) {
+    return <StyledContentBold css={css}>{children}</StyledContentBold>
 }
 
 export { ContentLarge, ContentLargeBold, Content, ContentSmall, ContentBold }

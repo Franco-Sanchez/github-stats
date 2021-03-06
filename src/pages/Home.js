@@ -13,7 +13,7 @@ const StyledHome = styled.section`
     row-gap: 10%;
     width: 100vw;
     height: 100vh;
-    padding: 16% 0 18% 0;
+    padding: 67px 0 18% 0;
 `
 
 function Home({ history }) {

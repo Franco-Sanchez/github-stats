@@ -9,7 +9,7 @@ import styled from "@emotion/styled";
 
 const StyledFollowers = styled.section`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 16px 0 18% 0;
 
   & > .container-followers {
