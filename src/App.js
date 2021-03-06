@@ -29,6 +29,10 @@ function App() {
               margin: 0 auto;
               background-color: #E5E5E5;
             }
+
+            li {
+              list-style: none;
+            }
           `}  
         />
         <Switch>
