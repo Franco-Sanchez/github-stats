@@ -29,7 +29,7 @@ const icons = {
   next: GrFormNext,
 };
 
-function Icon({ type, color, size }) {
+function Icon({ type, color, size, onPress }) {
   const SelectedIcon = icons[type];
   const baseCSS = css`
     fill: ${color};
@@ -38,7 +38,7 @@ function Icon({ type, color, size }) {
       stroke: ${color};
     }
   `
-  return <SelectedIcon css={baseCSS}/>
+  return <SelectedIcon onClick={onPress} css={baseCSS}/>
 }
 
 export default Icon;
