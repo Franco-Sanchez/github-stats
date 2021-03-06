@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 
 const StyledRepos = styled.section`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 16px 0 18% 0;
 
   & > .container-repos {
@@ -35,7 +35,13 @@ function Repos({ history }) {
         {repos.map((_repo) => {
           return (
             <Card type="repos">
-              <ContentBold color="#2D9CDB">gaearon/6to5</ContentBold>
+              <ContentBold
+                css={css`
+                  color: #2d9cdb;
+                `}
+              >
+                gaearon/6to5
+              </ContentBold>
               <ContentSmall>
                 Turn ES6+ code into readable vanilla ES5 with source maps and
                 more!

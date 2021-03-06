@@ -55,9 +55,9 @@ const StyledCard = styled.div`
     }
 ` 
 
-function Card({type, children}) {
+function Card({type, children, onPress}) {
     return (
-        <StyledCard type={type}>{children}</StyledCard>
+        <StyledCard onClick={onPress} type={type}>{children}</StyledCard>
     )
 }
 
