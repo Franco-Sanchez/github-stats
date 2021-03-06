@@ -19,7 +19,7 @@ const icons = {
   star: RiStarFill,
   starLine: RiStarLine,
   followers: HiUserGroup,
-  following: RiUserHeartFill,
+  followings: RiUserHeartFill,
   repos: RiGitRepositoryFill,
   gists: RiCodeBoxFill,
   github: AiFillGithub,
