@@ -10,10 +10,10 @@ const StyledHome = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 8%;
+    row-gap: 10%;
     width: 100vw;
     height: 100vh;
-    padding-top: 16%;
+    padding: 16% 0 18% 0;
 `
 
 function Home({ history }) {
