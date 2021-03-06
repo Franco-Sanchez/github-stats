@@ -1,11 +1,11 @@
-import Pagination from "../components/containers/Pagination";
+import NavBar from "../components/containers/NavBar";
 import Button from "../components/UI/Button";
 
 function Home() {
     return (
         <div>
             <Button>Continue</Button>
-            <Pagination />
+            <NavBar />
         </div>
     )
 }

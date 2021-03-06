@@ -27,6 +27,7 @@ function App() {
             body {
               max-width: 1440px;
               margin: 0 auto;
+              background-color: #E5E5E5;
             }
 
             li {
