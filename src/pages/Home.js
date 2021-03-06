@@ -1,17 +1,36 @@
-import Card from "../components/containers/Card";
+import { css } from '@emotion/react';
+import logo from '.././assets/images/gh.png';
 import NavBar from "../components/containers/NavBar";
 import Button from "../components/UI/Button";
-import Icon from "../components/UI/Icon";
-import { Heading2 } from '../components/text/Heading';
-import { Content, ContentBold, ContentSmall } from '../components/text/Content';
-import Avatar from '../components/UI/Avatar';
+import { Heading1 } from '../components/text/Heading';
+import styled from '@emotion/styled';
 
-function Home() {
+
+const StyledHome = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 8%;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 16%;
+`
+
+function Home({ history }) {
     return (
-        <section>
-            <Button>Continue</Button>
-            <NavBar/>
-        </section>
+        <StyledHome>
+            <Heading1 css={css`
+                width: 264px;
+                text-align: center;
+            `}>Welcome to Github Users</Heading1>
+            <img src={logo} />
+            <Button onClick={ () => history.push('/search')}>Continue</Button>
+            <NavBar css={css`
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            `} />
+        </StyledHome>
     )
 }
 

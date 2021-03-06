@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import NavBar from "../components/containers/NavBar";
 import Pagination from "../components/containers/Pagination";
 import Card from '../components/containers/Card';
@@ -12,7 +13,11 @@ function Repos() {
                 <ContentSmall>Turn ES6+ code into readable vanilla ES5 with source maps and more!</ContentSmall>
                 <div></div>
             </Card>
-            <NavBar />
+            <NavBar css={css`
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            `} />
         </section>
     )
 }

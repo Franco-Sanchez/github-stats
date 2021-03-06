@@ -1,4 +1,4 @@
-import defaultAvatar from '../../assets/images/default_avatar.svg';
+import defaultAvatar from '../../assets/images/default_avatar.png';
 import styled from "@emotion/styled";
 
 const StyledAvatar = styled.div`
