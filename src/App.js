@@ -28,6 +28,10 @@ function App() {
               max-width: 1440px;
               margin: 0 auto;
             }
+
+            li {
+              list-style: none;
+            }
           `}  
         />
         <Switch>
