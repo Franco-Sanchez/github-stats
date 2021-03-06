@@ -8,6 +8,7 @@ const StyledContent = styled.p`
 
 const StyledContentBold = styled(StyledContent)`
     font-weight: bold;
+    color: ${props => props.color ? props.color : '#333'};
 `
 
 const StyledContentLarge = styled(StyledContent)`
@@ -40,8 +41,8 @@ function ContentSmall({ children }) {
     return <StyledContentSmall>{children}</StyledContentSmall>
 }
 
-function ContentBold({ children }) {
-    return <StyledContentBold>{children}</StyledContentBold>
+function ContentBold({ children, color }) {
+    return <StyledContentBold color={color}>{children}</StyledContentBold>
 }
 
 export { ContentLarge, ContentLargeBold, Content, ContentSmall, ContentBold }
