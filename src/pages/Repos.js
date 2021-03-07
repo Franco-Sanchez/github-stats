@@ -7,6 +7,7 @@ import { Heading2 } from "../components/text/Heading";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import GithubServices from '../services/githubServices';
+import FooterRepos from "../components/containers/FooterRepos";
 
 const StyledRepos = styled.section`
   width: 100vw;
@@ -57,7 +58,7 @@ function Repos({ match }) {
               <ContentSmall>
                 {repo.description}
               </ContentSmall>
-              <div></div>
+              <FooterRepos language={repo.language} stars={repo.stargazers_count} forks={repo.forks_count} />
             </Card>
           );
         })}
