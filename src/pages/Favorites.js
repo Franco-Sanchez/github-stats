@@ -7,6 +7,8 @@ import { Heading2 } from "../components/text/Heading";
 import { Content, ContentSmall } from "../components/text/Content";
 import Icon from "../components/UI/Icon";
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import { toggleFavorite } from "../helpers/favorites";
 
 const StyledFavorites = styled.section`
   width: 100vw;
@@ -21,8 +23,15 @@ const StyledFavorites = styled.section`
   }
 `;
 
-function Favorites({ history }) {
-  const favorites = [1, 2, 3, 4, 5, 6, 7];
+function Favorites() {
+  let [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
   return (
     <StyledFavorites>
       <Heading2
@@ -34,20 +43,24 @@ function Favorites({ history }) {
       </Heading2>
       <div className="container-favorites">
         <Pagination />
-        {favorites.map((_favorite) => {
+        {favorites.map((favorite) => {
           return (
             <Card type="favorites">
               <div className="info-user">
-                <Avatar
-                  src="https://avatars.githubusercontent.com/u/71898894?v=4"
-                  measure="40"
-                />
+                <Avatar src={favorite.avatar_url} measure="40" />
                 <div>
-                  <Content>Dan Abramov</Content>
-                  <ContentSmall>gaearon</ContentSmall>
+                  <Content>{favorite.name}</Content>
+                  <ContentSmall>{favorite.login}</ContentSmall>
                 </div>
               </div>
-              <Icon type="star" color="#F2C94C" size="22" />
+              <Icon
+                onPress={() =>
+                  toggleFavorite(favorites, favorite, setFavorites)
+                }
+                type="star"
+                color="#F2C94C"
+                size="22"
+              />
             </Card>
           );
         })}
