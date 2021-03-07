@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Avatar from "../components/UI/Avatar";
 import styled from "@emotion/styled";
 import GithubServices from "../services/githubServices";
+import { getFavorite, toggleFavorite } from '../helpers/favorites';
 
 const StyledSearch = styled.section`
   width: 100vw;
@@ -33,14 +34,17 @@ const StyledSearch = styled.section`
 
 const getLocationQuery = (location) => {
   const values = location.search.slice(1);
-  const [_, value] = values.split('=')
-  return value || ''
-}
+  const [_, value] = values.split("=");
+  return value || "";
+};
 
 function Search({ history, location }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [query, setQuery] = useState(getLocationQuery(location));
+  let [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
 
   const noUser = () => {
     setData(null);
@@ -51,7 +55,7 @@ function Search({ history, location }) {
     let timerID;
     if (query === "") {
       noUser();
-      history.push(`/search`)
+      history.push(`/search`);
     } else {
       setLoading(true);
       async function fetchProfile() {
@@ -63,12 +67,16 @@ function Search({ history, location }) {
           setData(profile);
           setLoading(false);
         }
-        history.push(`/search?username=${query}`)
+        history.push(`/search?username=${query}`);
       }
       timerID = setTimeout(fetchProfile, 1000);
     }
     return () => clearTimeout(timerID);
   }, [query]);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   const NoData = () => {
     return (
@@ -82,7 +90,6 @@ function Search({ history, location }) {
   };
 
   const Profile = () => {
-
     const cards = [
       {
         color: "#2D9CDB",
@@ -115,7 +122,12 @@ function Search({ history, location }) {
         <Avatar src={data.avatar_url} measure="120" />
         <div className="info-user">
           <ContentLargeBold>{data.name}</ContentLargeBold>
-          <Icon type="starLine" color="#828282" size="25" />
+          <Icon
+            onPress={() => toggleFavorite(favorites, data, setFavorites)}
+            type={getFavorite(favorites, data) ? 'star' : "starLine"}
+            color={getFavorite(favorites, data) ? '#F2C94C' : "#828282"}
+            size="25"
+          />
         </div>
         <Content
           css={css`

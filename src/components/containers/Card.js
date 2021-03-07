@@ -42,7 +42,7 @@ const StyledCard = styled.div`
     box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
     width: ${props => stylesCard[props.type].width};
-    height: ${props => stylesCard[props.type].height};
+    min-height: ${props => stylesCard[props.type].height};
     flex-direction: ${props => stylesCard[props.type].flexDirection};
     justify-content: ${props => stylesCard[props.type].justifyContent};
     align-items: ${props => stylesCard[props.type].alignItems};
@@ -51,6 +51,7 @@ const StyledCard = styled.div`
 
     & .info-user {
         display: flex;
+        align-items: center;
         gap: 8px;
     }
 ` 
