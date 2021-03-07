@@ -31,7 +31,7 @@ function Pagination({ total, limit, page, onSelectPage }) {
     if(pages > 1 && page > 1) {
         listItems.push(<Icon key="left" type="previous" color="#828282" size="20" onPress={() => onSelectPage(page - 1)}/>)
     } else {
-        listItems.push(<li key="left" />)
+        listItems.push(<Icon key="left" type="previous" color="#828282" size="20" />)
     }
 
     for(let i = 1; i <= pages; i++) {
@@ -42,7 +42,7 @@ function Pagination({ total, limit, page, onSelectPage }) {
     if(pages > 1 && page < pages) {
         listItems.push(<Icon key="right" type="next" color="#828282" size="20" onPress={() => onSelectPage(page + 1)} />)
     } else {
-        listItems.push(<li key="right" />)
+        listItems.push(<Icon key="right" type="next" color="#828282" size="20" />)
     }
 
     return (
