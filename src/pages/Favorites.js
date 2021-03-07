@@ -57,7 +57,7 @@ function Favorites({ history, location }) {
           .slice((currentPage - 1) * limit, currentPage * limit)
           .map((favorite) => {
             return (
-              <Card type="favorites">
+              <Card type="favorites" key={favorite.login}>
                 <div className="info-user">
                   <Avatar src={favorite.avatar_url} measure="40" />
                   <div>
