@@ -6,7 +6,7 @@ import { ContentBold, ContentSmall } from "../components/text/Content";
 import { Heading2 } from "../components/text/Heading";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import GithubServices from '../services/githubServices';
+import GithubServices from "../services/githubServices";
 import FooterRepos from "../components/containers/FooterRepos";
 
 const StyledRepos = styled.section`
@@ -22,8 +22,10 @@ const StyledRepos = styled.section`
   }
 `;
 
-function Repos({ match }) {
+function Repos({ match, history, location }) {
   const [data, setData] = useState([]);
+  const limit = 5;
+  const currentPage = parseInt(location.search.slice(1).split("=")[1]) || 1;
 
   useEffect(() => {
     async function fetchRepos() {
@@ -32,7 +34,7 @@ function Repos({ match }) {
       setData(repos);
     }
     fetchRepos();
-  },[])
+  }, []);
 
   return (
     <StyledRepos>
@@ -44,24 +46,40 @@ function Repos({ match }) {
         Public Repos ({data.length})
       </Heading2>
       <div className="container-repos">
-        <Pagination />
-        {data.map(repo => {
-          return (
-            <Card type="repos" onPress={() => window.open(repo.html_url, '_blank')}>
-              <ContentBold
-                css={css`
-                  color: #2d9cdb;
-                `}
+        <Pagination
+          total={data.length}
+          limit={limit}
+          page={currentPage}
+          onSelectPage={(pageNum) => {
+            history.push(`${location.pathname}?=${pageNum}`);
+          }}
+        />
+        {data
+          .slice((currentPage - 1) * limit, currentPage * limit)
+          .map((repo) => {
+            return (
+              <Card
+                type="repos"
+                onPress={() => window.open(repo.html_url, "_blank")}
               >
-                {repo.full_name.length <= 25 ?  repo.full_name : `${repo.full_name.slice(0, 25)}...`}
-              </ContentBold>
-              <ContentSmall>
-                {repo.description}
-              </ContentSmall>
-              <FooterRepos language={repo.language} stars={repo.stargazers_count} forks={repo.forks_count} />
-            </Card>
-          );
-        })}
+                <ContentBold
+                  css={css`
+                    color: #2d9cdb;
+                  `}
+                >
+                  {repo.full_name.length <= 25
+                    ? repo.full_name
+                    : `${repo.full_name.slice(0, 25)}...`}
+                </ContentBold>
+                <ContentSmall>{repo.description}</ContentSmall>
+                <FooterRepos
+                  language={repo.language}
+                  stars={repo.stargazers_count}
+                  forks={repo.forks_count}
+                />
+              </Card>
+            );
+          })}
       </div>
       <NavBar
         css={css`
