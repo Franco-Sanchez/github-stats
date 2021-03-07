@@ -34,7 +34,7 @@ const StyledSearch = styled.section`
 
 const getLocationQuery = (location) => {
   const values = location.search.slice(1);
-  const [_, value] = values.split("=");
+  const value = values.split("=")[1];
   return value || "";
 };
 

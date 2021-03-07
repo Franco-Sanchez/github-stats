@@ -23,7 +23,7 @@ function Home({ history }) {
                 width: 264px;
                 text-align: center;
             `}>Welcome to Github Users</Heading1>
-            <img src={logo} />
+            <img src={logo} alt="github-logo" />
             <Button onClick={ () => history.push('/search')}>Continue</Button>
             <NavBar css={css`
                 position: fixed;

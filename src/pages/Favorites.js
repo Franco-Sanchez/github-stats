@@ -23,10 +23,13 @@ const StyledFavorites = styled.section`
   }
 `;
 
-function Favorites() {
+function Favorites({ history, location }) {
   let [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites")) || []
   );
+
+  const limit = 7;
+  const currentPage = parseInt(location.search.slice(1).split("=")[1]) || 1;
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -39,31 +42,40 @@ function Favorites() {
           margin-left: 32px;
         `}
       >
-        Favorites (7)
+        Favorites ({favorites.length})
       </Heading2>
       <div className="container-favorites">
-        <Pagination />
-        {favorites.map((favorite) => {
-          return (
-            <Card type="favorites">
-              <div className="info-user">
-                <Avatar src={favorite.avatar_url} measure="40" />
-                <div>
-                  <Content>{favorite.name}</Content>
-                  <ContentSmall>{favorite.login}</ContentSmall>
+        <Pagination
+          total={favorites.length}
+          limit={limit}
+          page={currentPage}
+          onSelectPage={(pageNum) => {
+            history.push(`/favorites?page=${pageNum}`);
+          }}
+        />
+        {favorites
+          .slice((currentPage - 1) * limit, currentPage * limit)
+          .map((favorite) => {
+            return (
+              <Card type="favorites">
+                <div className="info-user">
+                  <Avatar src={favorite.avatar_url} measure="40" />
+                  <div>
+                    <Content>{favorite.name}</Content>
+                    <ContentSmall>{favorite.login}</ContentSmall>
+                  </div>
                 </div>
-              </div>
-              <Icon
-                onPress={() =>
-                  toggleFavorite(favorites, favorite, setFavorites)
-                }
-                type="star"
-                color="#F2C94C"
-                size="22"
-              />
-            </Card>
-          );
-        })}
+                <Icon
+                  onPress={() =>
+                    toggleFavorite(favorites, favorite, setFavorites)
+                  }
+                  type="star"
+                  color="#F2C94C"
+                  size="22"
+                />
+              </Card>
+            );
+          })}
         <NavBar
           css={css`
             position: fixed;
