@@ -24,17 +24,30 @@ const StyledPagination = styled.ul`
     }
 `
 
-function Pagination() {
+function Pagination({ total, limit, page, onSelectPage }) {
+    const pages = Math.ceil(total / limit);
+    const listItems = [];
+
+    if(pages > 1 && page > 1) {
+        listItems.push(<Icon key="left" type="previous" color="#828282" size="20" onPress={() => onSelectPage(page - 1)}/>)
+    } else {
+        listItems.push(<li key="left" />)
+    }
+
+    for(let i = 1; i <= pages; i++) {
+        const className = i === page ? 'selected' : '';
+        listItems.push(<li key={i} className={className} onClick={() => onSelectPage(i)}>{i}</li>)
+    }
+
+    if(pages > 1 && page < pages) {
+        listItems.push(<Icon key="right" type="next" color="#828282" size="20" onPress={() => onSelectPage(page + 1)} />)
+    } else {
+        listItems.push(<li key="right" />)
+    }
+
     return (
         <StyledPagination>
-            <Icon type="previous" color="#828282" size="20" />
-                <li className="selected">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                {/* Recorrer li con un arreglo */}
-            <Icon type="next" color="#828282" size="20" />
+            {listItems}
         </StyledPagination>
     )
 }
