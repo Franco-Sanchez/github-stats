@@ -27,7 +27,6 @@ function Favorites({ history, location }) {
   let [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites")) || []
   );
-
   const limit = 7;
   const currentPage = parseInt(location.search.slice(1).split("=")[1]) || 1;
 

@@ -22,13 +22,15 @@ const StyledFollowers = styled.section`
   }
 `;
 
-function Followers({ match }) {
-  const [data, setData] = useState([])
-
+function Followers({ match, history, location }) {
+  const [data, setData] = useState([]);
+  const limit = 7;
+  const currentPage = parseInt(location.search.slice(1).split("=")[1]) || 1;
+  
   useEffect(() => {
     async function fetchFollowers() {
       const gs = new GithubServices();
-      const followers = await gs.followers(match.params.username)
+      const followers = await gs.followers(match.params.username);
       setData(followers);
     }
     fetchFollowers();
@@ -44,15 +46,24 @@ function Followers({ match }) {
         Followers ({data.length})
       </Heading2>
       <div className="container-followers">
-        <Pagination />
-        {data.map((follower) => {
-          return (
-            <Card type="follow" key={follower.login}>
-              <Avatar src={follower.avatar_url} measure="40" />
-              <Content>{follower.login}</Content>
-            </Card>
-          );
-        })}
+        <Pagination 
+          total={data.length}
+          limit={limit}
+          page={currentPage}
+          onSelectPage={(pageNum) => {
+            history.push(`${location.pathname}?=${pageNum}`)
+          }}
+        />
+        {data
+          .slice((currentPage - 1) * limit, currentPage * limit)
+          .map((follower) => {
+            return (
+              <Card type="follow" key={follower.login}>
+                <Avatar src={follower.avatar_url} measure="40" />
+                <Content>{follower.login}</Content>
+              </Card>
+            );
+          })}
       </div>
       <NavBar
         css={css`
