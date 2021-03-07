@@ -7,7 +7,7 @@ import { Content } from "../components/text/Content";
 import styled from "@emotion/styled";
 import { Heading2 } from "../components/text/Heading";
 import { useEffect, useState } from "react";
-import GithubServices from '../services/githubServices';
+import GithubServices from "../services/githubServices";
 
 const StyledFollowings = styled.section`
   width: 100vw;
@@ -22,8 +22,11 @@ const StyledFollowings = styled.section`
   }
 `;
 
-function Followings({ match }) {
+function Followings({ match, history, location }) {
   const [data, setData] = useState([]);
+  const limit = 7;
+  const currentPage = parseInt(location.search.slice(1).split("=")[1]) || 1;
+  console.log(currentPage);
 
   useEffect(() => {
     async function fetchFollowing() {
@@ -32,7 +35,7 @@ function Followings({ match }) {
       setData(following);
     }
     fetchFollowing();
-  }, [])
+  }, []);
 
   return (
     <StyledFollowings>
@@ -44,15 +47,24 @@ function Followings({ match }) {
         Followings ({data.length})
       </Heading2>
       <div className="container-followings">
-        <Pagination />
-        {data.map(following => {
-          return (
-            <Card type="follow" key={following.login}>
-              <Avatar src={following.avatar_url} measure="40" />
-              <Content>{following.login}</Content>
-            </Card>
-          );
-        })}
+        <Pagination
+          total={data.length}
+          limit={limit}
+          page={currentPage}
+          onSelectPage={(pageNum) => {
+            history.push(`${location.pathname}?=${pageNum}`);
+          }}
+        />
+        {data
+          .slice((currentPage - 1) * limit, currentPage * limit)
+          .map((following) => {
+            return (
+              <Card type="follow" key={following.login}>
+                <Avatar src={following.avatar_url} measure="40" />
+                <Content>{following.login}</Content>
+              </Card>
+            );
+          })}
       </div>
       <NavBar
         css={css`
