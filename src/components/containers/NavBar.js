@@ -20,16 +20,42 @@ const StyledNavBar = styled.div`
 function NavBar({ css }) {
   const history = useHistory(null);
   const location = useLocation(null);
-  const pages = ["home", "search", "favorites"];
   const redirectPages = {
-      home: '/',
-      search: '/search',
-      favorites: '/favorites'
-  }
+    home: "/",
+    search: "/search",
+    favorites: "/favorites",
+  };
   return (
     <StyledNavBar css={css}>
       <div className="container__icons">
-        {pages.map((page) => {
+        <Icon
+          onPress={() => history.push(redirectPages.home)}
+          type="home"
+          size="48"
+          color={
+            redirectPages.home === location.pathname ? "#828282" : "#BDBDBD"
+          }
+        />
+        <Icon
+          onPress={() => history.push(redirectPages.search)}
+          type="search"
+          size="48"
+          color={
+            redirectPages.search === location.pathname ? "#828282" : "#BDBDBD"
+          }
+        />
+        <Icon
+          onPress={() => history.push(redirectPages.favorites)}
+          type="star"
+          size="48"
+          color={
+            redirectPages.favorites === location.pathname ||
+            !Object.values(redirectPages).includes(location.pathname)
+              ? "#828282"
+              : "#BDBDBD"
+          }
+        />
+        {/* {pages.map((page) => {
           return (
             <Icon
               onPress={() => history.push(redirectPages[page])}
@@ -39,7 +65,7 @@ function NavBar({ css }) {
               size="48"
             />
           );
-        })}
+        })} */}
       </div>
     </StyledNavBar>
   );
