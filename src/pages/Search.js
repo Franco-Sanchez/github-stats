@@ -31,10 +31,16 @@ const StyledSearch = styled.section`
   }
 `;
 
-function Search({ history }) {
+const getLocationQuery = (location) => {
+  const values = location.search.slice(1);
+  const [_, value] = values.split('=')
+  return value || ''
+}
+
+function Search({ history, location }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(getLocationQuery(location));
 
   const noUser = () => {
     setData(null);
@@ -45,6 +51,7 @@ function Search({ history }) {
     let timerID;
     if (query === "") {
       noUser();
+      history.push(`/search`)
     } else {
       setLoading(true);
       async function fetchProfile() {
@@ -56,6 +63,7 @@ function Search({ history }) {
           setData(profile);
           setLoading(false);
         }
+        history.push(`/search?username=${query}`)
       }
       timerID = setTimeout(fetchProfile, 1000);
     }
@@ -143,6 +151,7 @@ function Search({ history }) {
   return (
     <StyledSearch>
       <Input
+        value={query}
         type="text"
         placeholder="username"
         onChange={(e) => setQuery(e.target.value)}
